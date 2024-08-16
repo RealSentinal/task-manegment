@@ -8,18 +8,18 @@ import Register from './Register'
 
 function auth() {
     return (
-        <Tabs defaultValue="account" className="w-[400px]">
-            <TabsList className="grid w-full grid-cols-2">
+        <Tabs defaultValue="account">
+            <TabsList className="grid w-full grid-cols-2 bg-zinc-800" >
                 <TabsTrigger value="account">Account</TabsTrigger>
                 <TabsTrigger value="password">Password</TabsTrigger>
-            </TabsList>
+            </TabsList >
             <TabsContent value="account">
                 <Login />
             </TabsContent>
             <TabsContent value="password">
                 <Register />
             </TabsContent>
-        </Tabs>
+        </Tabs >
     )
 }
 
