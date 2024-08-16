@@ -1,15 +1,11 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
 import Login from "./Login";
 import Register from './Register'
 
 function auth() {
     return (
         <Tabs defaultValue="account">
-            <TabsList className="grid w-full grid-cols-2 bg-zinc-800" >
+            <TabsList className="grid w-full h-14 grid-cols-2 bg-zinc-800 p-1" >
                 <TabsTrigger value="account">Account</TabsTrigger>
                 <TabsTrigger value="password">Password</TabsTrigger>
             </TabsList >

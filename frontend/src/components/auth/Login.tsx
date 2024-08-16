@@ -17,8 +17,8 @@ function login() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col">
-                <Input className="mb-1 bg-zinc-700 border-none placeholder:text-zinc-400" type="email" placeholder="Email" />
-                <Input className="mb-2 bg-zinc-700 border-none placeholder:text-zinc-400" type="password" placeholder="Password" />
+                <Input className="mb-1 bg-zinc-700 border-none placeholder:text-zinc-400" type="text" placeholder="Username" />
+                <Input className="mb-2 bg-zinc-700 border-none placeholder:text-zinc-400 mt-1" type="password" placeholder="Password" />
                 <div className="flex flex-row">
                     <Checkbox className="text-zinc-400 border-white mt-1 mr-2 checked:bg-white">Remember me</Checkbox>
                     <h1 className="text-zinc-200 text-sm text-wrap">By signing up, I agree with the <Link href="#terms" className="underline">Terms of Use</Link> & <Link className="underline" href="#privacy">Privacy Policy</Link></h1>
@@ -26,7 +26,7 @@ function login() {
                 <Button className="w-full mt-2 bg-cyan-600 hover:bg-cyan-700">Sign in</Button>
             </CardContent>
             <CardFooter className="flex flex-col items-center justify-center w-full">
-                <h1 className="text-white">Forget password ? <Link href="#forgot" className="underline text-cyan-600 hover:text-cyan-700">Click here</Link></h1>
+                <h1 className="text-white">Forgot password ? <Link href="#forgot" className="underline text-cyan-600 hover:text-cyan-700">Click here</Link></h1>
                 <div className="w-5/12 flex flex-row items-center justify-center mt-2">
                     <Separator className="mx-2 w-full" />
                     <h1 className="text-white">Or</h1>
