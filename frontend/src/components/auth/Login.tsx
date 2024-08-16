@@ -46,8 +46,8 @@ function login() {
                     {showPassword ? <Eye onClick={() => setShowPassword(!showPassword)} className="text-zinc-200 absolute right-3 cursor-pointer" /> : <EyeOff onClick={() => setShowPassword(!showPassword)} className="text-zinc-200 absolute right-3 cursor-pointer" />}
                 </div>
                 <div className="flex flex-row items-center">
-                    <Checkbox className="text-zinc-400 border-white mt-1 mr-2 checked:bg-white" onCheckedChange={() => setTerms(!terms)}>Remember me</Checkbox>
-                    <h1 className="text-zinc-200 text-sm text-wrap">By logging in, I agree with the <Link href="#terms" className="underline">Terms of Use</Link> & <Link className="underline" href="#privacy">Privacy Policy</Link></h1>
+                    <Checkbox className="text-zinc-400 border-white mr-2 checked:bg-white" onCheckedChange={() => setTerms(!terms)}>Remember me</Checkbox>
+                    <h1 className="text-zinc-200 text-sm text-wrap m-2">By logging in, I agree with the <Link href="#terms" className="underline">Terms of Use</Link> & <Link className="underline" href="#privacy">Privacy Policy</Link></h1>
                 </div>
                 <Button onClick={login} className="w-full mt-2 bg-cyan-600 hover:bg-cyan-700" disabled={!terms}>Log in</Button>
             </CardContent>
