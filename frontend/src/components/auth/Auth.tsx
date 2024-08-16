@@ -4,15 +4,15 @@ import Register from './Register'
 
 function auth() {
     return (
-        <Tabs defaultValue="account">
+        <Tabs defaultValue="login">
             <TabsList className="grid w-full h-14 grid-cols-2 bg-zinc-800 p-1" >
-                <TabsTrigger value="account">Account</TabsTrigger>
-                <TabsTrigger value="password">Password</TabsTrigger>
+                <TabsTrigger value="login">Login</TabsTrigger>
+                <TabsTrigger value="register">Register</TabsTrigger>
             </TabsList >
-            <TabsContent value="account">
+            <TabsContent value="login">
                 <Login />
             </TabsContent>
-            <TabsContent value="password">
+            <TabsContent value="register">
                 <Register />
             </TabsContent>
         </Tabs >
