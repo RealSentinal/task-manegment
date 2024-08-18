@@ -1,6 +1,7 @@
-import fs from 'fs';
 import path from 'path';
 import { Application } from 'express';
+import { checksession } from './auth/checksession';
+
 const sqlite3 = require("sqlite3").verbose();
 
 import { register } from './auth/register';
@@ -22,6 +23,7 @@ function auth(app: Application) {
 
     register(app, db);
     login(app, db);
+    checksession(app);
 }
 
 export { auth }

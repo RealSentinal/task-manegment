@@ -4,7 +4,7 @@ import session from 'express-session';
 import { auth } from './api/auth';
 
 const app = express();
-const port = 3001;
+const port = 3000;
 
 app.use(session({
     secret: 'lasjdnisjdnSAaPKDMslasmd',

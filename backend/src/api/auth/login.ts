@@ -21,16 +21,16 @@ async function login(app: Application, db: sqlite3.Database) {
         db.get("SELECT * FROM users WHERE username = ?", [username], async (err, row: User) => {
             if (err) {
                 console.error(err);
-                res.status(500).send("Error logging in");
+                res.status(500).send({ message: "Error logging in" });
                 return;
             }
             if (!row) {
-                res.status(401).send("Invalid username");
+                res.status(401).send({ message: "Invalid username" });
                 return;
             }
             const passwordMatch = await bcrypt.compare(password, row.password);
             if (!passwordMatch) {
-                res.status(401).send("Invalid password");
+                res.status(401).send({ message: "Invalid password" });
                 return;
             }
 
@@ -39,7 +39,7 @@ async function login(app: Application, db: sqlite3.Database) {
                 username: row.username,
                 email: row.email
             }
-            res.status(200).send("Logged in successfully");
+            res.status(200).send({ message: "Logged in successfully" });
         })
     })
 }
