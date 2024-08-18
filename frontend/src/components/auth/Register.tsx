@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import axios from "axios"
 import Image from "next/image"
 import Link from "next/link"
@@ -12,17 +12,20 @@ import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 
 function register() {
+    const username = useRef<HTMLInputElement>(null)
+    const email = useRef<HTMLInputElement>(null)
+    const password = useRef<HTMLInputElement>(null)
+    const confirmPassword = useRef<HTMLInputElement>(null)
+
     const register = () => {
-        const origin: string = window.location.origin
-        const username = document.getElementById("reg-username") as HTMLInputElement
-        const email = document.getElementById("reg-email") as HTMLInputElement
-        const password = document.getElementById("reg-password") as HTMLInputElement
-        const confirmPassword = document.getElementById("reg-confirm-password") as HTMLInputElement
-        axios.post(`${origin}/api/register`, {
-            username: username.value,
-            email: email.value,
-            password: password.value,
-            confirmPassword: confirmPassword.value
+        if (password.current?.value !== confirmPassword.current?.value) {
+            alert("Passwords do not match")
+        }
+
+        axios.post(`/api/auth/register`, {
+            username: username.current?.value,
+            email: email.current?.value,
+            password: password.current?.value,
         }).then((res) => {
             console.log(res)
         })
@@ -42,21 +45,21 @@ function register() {
             <CardContent className="flex flex-col">
                 <div className="flex flex-row relative items-center">
                     <User className="text-zinc-200 absolute ml-3" />
-                    <Input id="reg-username" className="mb-1 bg-zinc-700 border-none placeholder:text-zinc-400 pl-12" type="text" placeholder="Username" />
+                    <Input ref={username} className="mb-1 bg-zinc-700 border-none placeholder:text-zinc-400 pl-12" type="text" placeholder="Username" />
                 </div>
                 <div className="flex flex-row relative items-center">
                     <Mail className="text-zinc-200 absolute ml-3" />
-                    <Input id="reg-email" className="mb-1 bg-zinc-700 border-none placeholder:text-zinc-400 mt-1 pl-12" type="email" placeholder="Email" />
+                    <Input ref={email} className="mb-1 bg-zinc-700 border-none placeholder:text-zinc-400 mt-1 pl-12" type="email" placeholder="Email" />
                 </div>
                 <div className="flex flex-row gap-2 mt-1 mb-1">
                     <div className="flex flex-row relative items-center">
                         <Lock className="text-zinc-200 absolute ml-3" />
-                        <Input id="reg-password" className="bg-zinc-700 border-none placeholder:text-zinc-400 pl-12" type={showPassword ? "text" : "password"} placeholder="Password" />
+                        <Input ref={password} className="bg-zinc-700 border-none placeholder:text-zinc-400 pl-12" type={showPassword ? "text" : "password"} placeholder="Password" />
                         {showPassword ? <Eye onClick={() => setShowPassword(!showPassword)} className="text-zinc-200 absolute right-3" /> : <EyeOff onClick={() => setShowPassword(!showPassword)} className="text-zinc-200 absolute right-3 cursor-pointer" />}
                     </div>
                     <div className="flex flex-row relative items-center">
                         <Lock className="text-zinc-200 absolute ml-3" />
-                        <Input id="reg-confirm-password" className="bg-zinc-700 border-none placeholder:text-zinc-400 pl-12" type={showConfirmPassword ? "text" : "password"} placeholder="Confirm Password" />
+                        <Input ref={confirmPassword} className="bg-zinc-700 border-none placeholder:text-zinc-400 pl-12" type={showConfirmPassword ? "text" : "password"} placeholder="Confirm Password" />
                         {showConfirmPassword ? <Eye onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="text-zinc-200 absolute right-3 cursor-pointer" /> : <EyeOff onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="text-zinc-200 absolute right-3 cursor-pointer" />}
                     </div>
                 </div>

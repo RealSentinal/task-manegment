@@ -25,19 +25,21 @@ async function login(app: Application, db: sqlite3.Database) {
                 return;
             }
             if (!row) {
-                res.status(401).send("Invalid username or password");
+                res.status(401).send("Invalid username");
                 return;
             }
             const passwordMatch = await bcrypt.compare(password, row.password);
             if (!passwordMatch) {
-                res.status(401).send("Invalid username or password");
+                res.status(401).send("Invalid password");
                 return;
             }
-            res.status(200).send({
+
+            req.session.user = {
                 id: row.id,
                 username: row.username,
                 email: row.email
-            });
+            }
+            res.status(200).send("Logged in successfully");
         })
     })
 }

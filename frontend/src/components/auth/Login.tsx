@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import axios from "axios"
 import Link from "next/link"
 import Image from "next/image"
@@ -12,13 +12,14 @@ import { Input } from "../ui/input"
 import { Separator } from "../ui/separator"
 
 function login() {
+    const email = useRef<HTMLInputElement>(null)
+    const password = useRef<HTMLInputElement>(null)
+
     const login = () => {
-        const origin: string = window.location.origin
-        const email = document.getElementById("email") as HTMLInputElement
-        const password = document.getElementById("password") as HTMLInputElement
-        axios.post(`${origin}/api/auth/login`, {
-            email: email.value,
-            password: password.value
+        console.log(email, password)
+        axios.post(`/api/auth/login`, {
+            username: email.current?.value,
+            password: password.current?.value
         }).then((res) => {
             console.log(res)
         })
@@ -38,11 +39,11 @@ function login() {
             <CardContent className="flex flex-col">
                 <div className="flex flex-row relative items-center">
                     <User className="text-zinc-200 absolute ml-3" />
-                    <Input id="email" className="mb-1 bg-zinc-700 border-none placeholder:text-zinc-400 pl-12" type="text" placeholder="Username" />
+                    <Input id="email" ref={email} className="mb-1 bg-zinc-700 border-none placeholder:text-zinc-400 pl-12" type="text" placeholder="Username" />
                 </div>
                 <div className="flex flex-row items-center relative">
                     <Lock className="text-zinc-200 absolute ml-3" />
-                    <Input id="password" className="mb-2 bg-zinc-700 border-none placeholder:text-zinc-400 mt-1 pl-12" type={showPassword ? "text" : "password"} placeholder="Password" />
+                    <Input id="password" ref={password} className="mb-2 bg-zinc-700 border-none placeholder:text-zinc-400 mt-1 pl-12" type={showPassword ? "text" : "password"} placeholder="Password" />
                     {showPassword ? <Eye onClick={() => setShowPassword(!showPassword)} className="text-zinc-200 absolute right-3 cursor-pointer" /> : <EyeOff onClick={() => setShowPassword(!showPassword)} className="text-zinc-200 absolute right-3 cursor-pointer" />}
                 </div>
                 <div className="flex flex-row items-center">
