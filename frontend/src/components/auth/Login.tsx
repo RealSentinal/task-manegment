@@ -16,12 +16,12 @@ function login() {
     const password = useRef<HTMLInputElement>(null)
 
     const login = () => {
-        console.log(email, password)
         axios.post(`/api/auth/login`, {
             username: email.current?.value,
             password: password.current?.value
         }).then((res) => {
-            console.log(res)
+            localStorage.setItem("token", res.data.token)
+            console.log(res.data)
         })
     }
 

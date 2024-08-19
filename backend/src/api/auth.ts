@@ -1,13 +1,13 @@
 import path from 'path';
 import { Application } from 'express';
-import { checksession } from './auth/checksession';
+import { authenticate } from './auth/authenticate';
 
 const sqlite3 = require("sqlite3").verbose();
 
 import { register } from './auth/register';
 import { login } from './auth/login';
 
-const db = new sqlite3.Database(path.resolve(__dirname, "../db/user.db"));
+const db = new sqlite3.Database(path.resolve(__dirname, "./db/user.db"));
 
 function auth(app: Application) {
     db.serialize(() => {
@@ -23,7 +23,7 @@ function auth(app: Application) {
 
     register(app, db);
     login(app, db);
-    checksession(app);
+    authenticate(app);
 }
 
 export { auth }

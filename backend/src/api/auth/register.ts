@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { Application, Request, Response } from "express";
 
 async function register(app: Application, db: sqlite3.Database) {
-
+    console.log("New register route");
     app.post("/api/auth/register", async (req: Request, res: Response) => {
         const username: string = req.body.username;
         const password: string = req.body.password;

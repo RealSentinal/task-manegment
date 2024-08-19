@@ -11,41 +11,53 @@ interface User {
 }
 
 async function login(app: Application, db: sqlite3.Database) {
+    console.log("New login route");
+
     app.post("/api/auth/login", async (req, res) => {
-        const username: string = req.body.username;
-        const password: string = req.body.password;
+        const { username, password } = req.body;
+
         if (!username || !password) {
-            res.status(400).send("Missing username or password");
-            return;
+            return res.send("Missing username or password");
         }
 
-        db.get("SELECT * FROM users WHERE username = ?", [username], async (err, row: User) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send({ message: "Error logging in" });
-                return;
-            }
-            if (!row) {
-                res.status(401).send({ message: "Invalid username" });
-                return;
-            }
-            const passwordMatch = await bcrypt.compare(password, row.password);
-            if (!passwordMatch) {
-                res.status(401).send({ message: "Invalid password" });
-                return;
-            }
+        try {
+            db.get("SELECT * FROM users WHERE username = ?", [username], async (err, row: User) => {
+                if (err) {
+                    console.error("Database error:", err);
+                    return res.send({ message: "Error logging in" });
+                }
 
-            req.session.user = {
-                id: row.id,
-                sessionId: req.sessionID,
-            }
-            req.session.token = jwt.sign({ id: row.id }, "ASDQWE123321", { expiresIn: "2m" });
+                if (!row) {
+                    return res.send({ message: "Invalid username" });
+                }
 
-            res.status(200).send({
-                message: "Logged in successfully",
+                const passwordMatch = await bcrypt.compare(password, row.password);
+
+                if (!passwordMatch) {
+                    return res.send({ message: "Invalid password" });
+                }
+
+                const token = jwt.sign(
+                    { id: row.id, username: row.username, email: row.email },
+                    process.env.JWT_SECRET || "ASDQWE123321",
+                    { expiresIn: "15m" }
+                );
+
+                req.session.user = {
+                    id: row.id,
+                    username: row.username,
+                };
+
+                return res.send({
+                    message: "Logged in successfully",
+                    token: token
+                });
             });
-        })
-    })
+        } catch (error) {
+            console.error("Login error:", error);
+            return res.status(500).send({ message: "Internal server error" });
+        }
+    });
 }
 
-export { login }
+export { login };
