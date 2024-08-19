@@ -4,7 +4,6 @@ import { Application } from "express";
 function authenticate(app: Application) {
     app.post('/api/auth/authenticate', (req, res) => {
         const token = req.body.token;
-        console.log(token)
 
         if (!token) {
             return res.json({ active: false, message: "Session expired or invalid" });
