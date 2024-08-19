@@ -3,9 +3,9 @@ import axios from "axios";
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
-    console.log(body)
     const username: string = body.username;
     const password: string = body.password;
+
     if (!username || !password) {
         return NextResponse.json({ error: "Missing username or password" }, { status: 400 });
     }
@@ -21,9 +21,8 @@ export async function POST(request: NextRequest) {
             }
         }
     ).then((res) => {
-        console.log(res)
         return NextResponse.json(res.data, { status: 200 })
     }).catch((err) => {
-        console.log(err)
+        return NextResponse.json({ error: err }, { status: 500 })
     })
 }

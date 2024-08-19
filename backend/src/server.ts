@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import cookieparser from 'cookie-parser'
 
 import { auth } from './api/auth';
 
@@ -15,6 +16,7 @@ app.use(session({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieparser());
 
 auth(app);
 

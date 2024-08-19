@@ -1,5 +1,6 @@
 import sqlite3 from "sqlite3";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { Application } from "express";
 
 interface User {
@@ -36,10 +37,13 @@ async function login(app: Application, db: sqlite3.Database) {
 
             req.session.user = {
                 id: row.id,
-                username: row.username,
-                email: row.email
+                sessionId: req.sessionID,
             }
-            res.status(200).send({ message: "Logged in successfully" });
+            req.session.token = jwt.sign({ id: row.id }, "ASDQWE123321", { expiresIn: "2m" });
+
+            res.status(200).send({
+                message: "Logged in successfully",
+            });
         })
     })
 }
