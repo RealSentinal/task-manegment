@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import BeatLoader from 'react-spinners/BeatLoader'
 import Link from "next/link"
 import axios from "axios"
-import Auth from "@/components/auth/Auth"
+import Menu from "@/components/app/Menu"
 import { redirect } from "next/navigation"
 
 function app() {
@@ -55,8 +55,8 @@ function app() {
     }
 
     return (
-        <main className="w-screen h-screen bg-zinc-900 flex items-center justify-center">
-            <h1 className="text-white font-bold text-3xl">Yes i did</h1>
+        <main className="w-screen h-screen bg-zinc-900 flex flex-row items-center justify-start">
+            <Menu />
         </main>
     )
 }
