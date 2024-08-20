@@ -3,8 +3,11 @@ import { useEffect, useState } from "react"
 import BeatLoader from 'react-spinners/BeatLoader'
 import Link from "next/link"
 import axios from "axios"
-import Menu from "@/components/app/Menu"
 import { redirect } from "next/navigation"
+
+import Menu from "@/components/app/Menu"
+import Dashboard from "@/components/app/dashboard/dashboard"
+
 
 function app() {
     const [isLoading, setIsLoading] = useState(true)
@@ -57,6 +60,7 @@ function app() {
     return (
         <main className="w-screen h-screen bg-zinc-900 flex flex-row items-center justify-start">
             <Menu />
+            <Dashboard />
         </main>
     )
 }
