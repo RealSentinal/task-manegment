@@ -3,6 +3,7 @@ import { useRef, useState } from "react"
 import axios from "axios"
 import Link from "next/link"
 import Image from "next/image"
+import { redirect } from "next/navigation"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "../ui/card"
 import { User, Lock, Eye, EyeOff } from "lucide-react"
@@ -12,21 +13,42 @@ import { Input } from "../ui/input"
 import { Separator } from "../ui/separator"
 
 function login() {
+    const [showPassword, setShowPassword] = useState(false)
+    const [terms, setTerms] = useState(false)
     const email = useRef<HTMLInputElement>(null)
     const password = useRef<HTMLInputElement>(null)
 
-    const login = () => {
-        axios.post(`/api/auth/login`, {
-            username: email.current?.value,
-            password: password.current?.value
-        }).then((res) => {
-            localStorage.setItem("token", res.data.token)
-            console.log(res.data)
-        })
+    const [isAuth, setIsAuth] = useState(false)
+    const [isError, setIsError] = useState(false)
+
+    const login = async () => {
+        try {
+            const response = await axios.post(`/api/auth/login`, {
+                username: email.current?.value,
+                password: password.current?.value
+            })
+
+            if (response.data.active) {
+                localStorage.setItem("token", response.data.token)
+                setIsAuth(true)
+            }
+        } catch (error: any) {
+            setIsError(true)
+        }
     }
 
-    const [showPassword, setShowPassword] = useState(false)
-    const [terms, setTerms] = useState(false)
+    if (isError) {
+        return (
+            <main className="w-screen h-screen bg-zinc-900 flex flex-col items-center justify-center">
+                <p className="text-red-500 text-2xl font-bold">Something went wrong</p>
+                <Link className="text-red-600 underline" href="#help">I think there's something you need to tell me</Link>
+            </main>
+        )
+    }
+
+    if (isAuth) {
+        redirect("/app")
+    }
 
     return (
         <Card className="bg-zinc-800 border-none shadow-2xl">

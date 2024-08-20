@@ -49,6 +49,7 @@ async function login(app: Application, db: sqlite3.Database) {
                 };
 
                 return res.send({
+                    active: true,
                     message: "Logged in successfully",
                     token: token
                 });

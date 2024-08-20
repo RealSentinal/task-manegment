@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import { setCookie } from "nookies";
 
 async function POST(request: NextRequest) {
     const body = await request.json();
@@ -19,7 +18,6 @@ async function POST(request: NextRequest) {
             withCredentials: true,
         }
     )
-
     return NextResponse.json(response.data, { status: 200 });
 }
 
