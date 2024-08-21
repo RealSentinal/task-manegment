@@ -30,7 +30,7 @@ async function POST(request: NextRequest) {
 
     try {
         const res = await axios.post(
-            `http://localhost:3000/api/auth/register`,
+            `http://localhost:3001/api/auth/register`,
             {
                 username: username,
                 password: password,

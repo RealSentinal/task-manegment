@@ -13,11 +13,11 @@ function Menu() {
 
     const buttonCss = "bg-transparent rounded-full text-white hover:bg-transparent pl-6 hover:border-2 active:border-cyan-400 relative flex flex-row items-center"
     const buttonActiveCss = "bg-white rounded-full text-white hover:bg-white relative pl-6 border-2 active:border-cyan-400 flex flex-row items-center text-grey-400"
-    const buttonSvg = "w-5 h-5 left-[28%] absolute text-white"
-    const buttonSvgActive = "w-5 h-5 left-[28%] absolute text-zinc-800 text-grey-400"
+    const buttonSvg = "w-5 h-5 left-[20%] absolute text-white"
+    const buttonSvgActive = "w-5 h-5 left-[20%] absolute text-zinc-800 text-grey-400"
 
     return (
-        <div className='w-[330px] bg-zinc-800 h-screen flex flex-col items-center gap-1'>
+        <div className='w-2/12 bg-zinc-800 h-screen flex flex-col items-center gap-1'>
             <h1 className='text-white font-bold w-full flex justify-center text-3xl italic mt-6'>SENTINAL</h1>
             <Separator className='my-4 w-[90%]' />
             <div className='w-full h-fit flex flex-col gap-1 px-8'>

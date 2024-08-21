@@ -5,7 +5,7 @@ async function POST(request: NextRequest) {
     const body = await request.json();
     const token = body.token;
     try {
-        const response = await axios.post(`http://localhost:3000/api/auth/authenticate`, { token: token }, {
+        const response = await axios.post(`http://localhost:3001/api/auth/authenticate`, { token: token }, {
             withCredentials: true
         });
         return NextResponse.json(response.data, { status: 200 });

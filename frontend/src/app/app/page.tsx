@@ -6,8 +6,7 @@ import axios from "axios"
 import { redirect } from "next/navigation"
 
 import Menu from "@/components/app/Menu"
-import Dashboard from "@/components/app/dashboard/dashboard"
-
+import Dashboard from "@/components/app/dashboard/Dashboard";
 
 function app() {
     const [isLoading, setIsLoading] = useState(true)

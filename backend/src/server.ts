@@ -5,7 +5,7 @@ import cookieparser from 'cookie-parser'
 import { auth } from './api/auth';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(session({
     secret: 'lasjdnisjdnSAaPKDMslasmd',
@@ -20,6 +20,6 @@ app.use(cookieparser());
 
 auth(app);
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });

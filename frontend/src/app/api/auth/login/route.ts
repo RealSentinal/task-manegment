@@ -10,7 +10,7 @@ async function POST(request: NextRequest) {
         return NextResponse.json({ error: "Missing username or password" }, { status: 400 });
     }
 
-    const response = await axios.post(`http://localhost:3000/api/auth/login`, {
+    const response = await axios.post(`http://localhost:3001/api/auth/login`, {
         username: username,
         password: password
     },

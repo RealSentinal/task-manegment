@@ -40,7 +40,7 @@ async function login(app: Application, db: sqlite3.Database) {
                 const token = jwt.sign(
                     { id: row.id, username: row.username, email: row.email },
                     process.env.JWT_SECRET || "ASDQWE123321",
-                    { expiresIn: "15m" }
+                    { expiresIn: "1d" }
                 );
 
                 req.session.user = {
